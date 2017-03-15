@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.sync;
+package com.stockhawk.sync;
 
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
@@ -8,9 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.widget.Toast;
 
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
+import com.stockhawk.R;
+import com.stockhawk.data.Contract;
+import com.stockhawk.data.PrefUtils;
+import com.stockhawk.ui.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,10 +32,12 @@ import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 import yahoofinance.quotes.stock.StockQuote;
 
+import static android.os.Looper.getMainLooper;
+
 public final class QuoteSyncJob {
 
     private static final int ONE_OFF_ID = 2;
-    private static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
+    private static final String ACTION_DATA_UPDATED = "com.stockhawk.ACTION_DATA_UPDATED";
     private static final int PERIOD = 300000;
     private static final int INITIAL_BACKOFF = 10000;
     private static final int PERIODIC_ID = 1;
@@ -49,7 +55,6 @@ public final class QuoteSyncJob {
         from.add(Calendar.YEAR, -YEARS_OF_HISTORY);
 
         try {
-
             Set<String> stockPref = PrefUtils.getStocks(context);
             Set<String> stockCopy = new HashSet<>();
             stockCopy.addAll(stockPref);
@@ -65,15 +70,18 @@ public final class QuoteSyncJob {
             Iterator<String> iterator = stockCopy.iterator();
 
             Timber.d(quotes.toString());
-
             ArrayList<ContentValues> quoteCVs = new ArrayList<>();
 
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
 
-
                 Stock stock = quotes.get(symbol);
                 StockQuote quote = stock.getQuote();
+                if(quote.getPrice()==null)
+                {
+                    showErrorToast(context , symbol);
+                    continue;
+                }
 
                 float price = quote.getPrice().floatValue();
                 float change = quote.getChange().floatValue();
@@ -151,7 +159,9 @@ public final class QuoteSyncJob {
         if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
             Intent nowIntent = new Intent(context, QuoteIntentService.class);
             context.startService(nowIntent);
-        } else {
+        }
+        else
+            {
 
             JobInfo.Builder builder = new JobInfo.Builder(ONE_OFF_ID, new ComponentName(context, QuoteJobService.class));
 
@@ -167,6 +177,23 @@ public final class QuoteSyncJob {
 
         }
     }
+
+
+
+
+    private static void showErrorToast(final Context context, final String symbol) {
+        Handler handler = new Handler(getMainLooper());
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, String.format(context.getString(R.string.toast_stock_invalid), symbol), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        PrefUtils.removeStock(context, symbol);
+
+    }
+
 
 
 }

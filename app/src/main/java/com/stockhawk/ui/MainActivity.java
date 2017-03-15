@@ -1,6 +1,8 @@
-package com.udacity.stockhawk.ui;
+package com.stockhawk.ui;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -13,20 +15,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.udacity.stockhawk.R;
-import com.udacity.stockhawk.data.Contract;
-import com.udacity.stockhawk.data.PrefUtils;
-import com.udacity.stockhawk.sync.QuoteSyncJob;
+import com.stockhawk.R;
+import com.stockhawk.data.Contract;
+import com.stockhawk.data.PrefUtils;
+import com.stockhawk.sync.QuoteSyncJob;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
+import yahoofinance.Stock;
+import yahoofinance.YahooFinance;
+import yahoofinance.histquotes.HistoricalQuote;
+import yahoofinance.histquotes.Interval;
+import yahoofinance.quotes.stock.StockQuote;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>,
         SwipeRefreshLayout.OnRefreshListener,
@@ -42,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @SuppressWarnings("WeakerAccess")
     @BindView(R.id.error)
     TextView error;
+    @SuppressWarnings("WeakerAccess")
+    @BindView(R.id.no_internet_connection)
+    ImageView no_connection_ImageView;
     private StockAdapter adapter;
 
     @Override
@@ -59,9 +79,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         adapter = new StockAdapter(this, this);
         stockRecyclerView.setAdapter(adapter);
         stockRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setRefreshing(true);
+
         onRefresh();
         QuoteSyncJob.initialize(this);
         getSupportLoaderManager().initLoader(STOCK_LOADER, null, this);
@@ -99,7 +119,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_network));
             error.setVisibility(View.VISIBLE);
+            no_connection_ImageView.setVisibility(View.VISIBLE);
+            error.setContentDescription(getString(R.string.error_no_network));
         } else if (!networkUp()) {
+
             swipeRefreshLayout.setRefreshing(false);
             Toast.makeText(this, R.string.toast_no_connectivity, Toast.LENGTH_LONG).show();
 
@@ -107,8 +130,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             swipeRefreshLayout.setRefreshing(false);
             error.setText(getString(R.string.error_no_stocks));
             error.setVisibility(View.VISIBLE);
+            no_connection_ImageView.setVisibility(View.VISIBLE);
+            error.setContentDescription(getString(R.string.error_no_stocks));
+
         } else {
             error.setVisibility(View.GONE);
+            no_connection_ImageView.setVisibility(View.GONE);
+
         }
     }
 
@@ -120,19 +148,30 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     void addStock(String symbol) {
         if (symbol != null && !symbol.isEmpty()) {
 
-            if (networkUp()) {
+            Set<String> stockPref = PrefUtils.getStocks(this);
+            boolean isExist = stockPref.contains(symbol);
+            if(isExist)
+            {
+                Toast.makeText(this , String.format(getResources().getString(R.string.toast_stock_exist) ,symbol) ,Toast.LENGTH_LONG).show();
+            }
+            else if (!isExist && networkUp() )
+            {
                 swipeRefreshLayout.setRefreshing(true);
-            } else {
+                PrefUtils.addStock(this, symbol);
+                QuoteSyncJob.syncImmediately(this);
+            }
+            else {
                 String message = getString(R.string.toast_stock_added_no_connectivity, symbol);
                 Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             }
-
-            PrefUtils.addStock(this, symbol);
-            QuoteSyncJob.syncImmediately(this);
         }
     }
-    //slidner
-////////////////////////////////////////////
+
+
+
+
+
+    ////////////////////////////////////////////
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new CursorLoader(this,
@@ -147,7 +186,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         if (data.getCount() != 0) {
             error.setVisibility(View.GONE);
+            no_connection_ImageView.setVisibility(View.GONE);
+
         }
+
         adapter.setCursor(data);
     }
 

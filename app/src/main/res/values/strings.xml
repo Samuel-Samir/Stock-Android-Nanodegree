@@ -31,5 +31,18 @@
 
     <string name="toast_stock_added_no_connectivity">Symbol %s added. Will refresh when network available.</string>
     <string name="toast_no_connectivity">Will refresh when network available.</string>
+    
+    <string name="company_description">Company Name</string>
+    <string name="company_Price_description">Company Price</string>
+    <string name="percent_Change_description">Company  Percent Change</string>
+    <string name="new_company_description">add new Corporation</string>
+    <string name="type_name_company_description">Type the name of the new Corporation</string>
+    <string name="no_connection_image_description">No internet connection </string>
+    <string name="toast_stock_invalid">Symbol %s is invalid!</string>"
+    <string name="toast_stock_exist">Symbol %s is already exist</string>
+
+
+
+
 
 </resources>

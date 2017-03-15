@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.udacity.stockhawk.ui.MainActivity">
+    tools:context="com.stockhawk.ui.MainActivity">
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh"
@@ -16,8 +16,8 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin" />
+            android:paddingStart="@dimen/activity_horizontal_margin"
+            android:paddingEnd="@dimen/activity_horizontal_margin" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
@@ -26,21 +26,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/dp16"
         android:onClick="button"
         android:src="@drawable/fab_plus"
         app:backgroundTint="@color/material_blue_500"
         app:borderWidth="0dp"
         app:elevation="6dp"
         app:fabSize="normal"
-        app:pressedTranslationZ="12dp" />
+        app:pressedTranslationZ="12dp"
+        android:contentDescription="@string/type_name_company_description"
+        />
+    <ImageView
+        android:src="@drawable/ic_no_connection2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/no_connection_margin"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/no_connection_image_description"
+        android:visibility="gone"
+        android:id="@+id/no_internet_connection"
+        />
 
     <TextView
         android:id="@+id/error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
         android:textAppearance="@android:style/TextAppearance.Medium"
+        tools:text="Error message"
+        android:layout_marginBottom="@dimen/no_connection_margin"
+        android:paddingStart="@dimen/dp32"
+        android:paddingEnd="@dimen/dp16"
         android:visibility="gone"
-        tools:text="Error message" />
+
+        />
 </merge>

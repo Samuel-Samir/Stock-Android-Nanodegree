@@ -1,4 +1,4 @@
-package com.udacity.stockhawk.ui;
+package com.stockhawk.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -12,10 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.udacity.stockhawk.R;
+import com.stockhawk.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
