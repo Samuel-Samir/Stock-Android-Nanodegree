@@ -2,15 +2,21 @@ package com.stockhawk.ui;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stockhawk.R;
 import com.stockhawk.data.Contract;
+import com.stockhawk.data.ItemDetails;
 import com.stockhawk.data.PrefUtils;
 
 import java.text.DecimalFormat;
@@ -22,7 +28,7 @@ import butterknife.ButterKnife;
 
 class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
 
-    private final Context context;
+    public final Context context;
     private final DecimalFormat dollarFormatWithPlus;
     private final DecimalFormat dollarFormat;
     private final DecimalFormat percentageFormat;
@@ -129,7 +135,17 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             int adapterPosition = getAdapterPosition();
             cursor.moveToPosition(adapterPosition);
             int symbolColumn = cursor.getColumnIndex(Contract.Quote.COLUMN_SYMBOL);
-            clickHandler.onClick(cursor.getString(symbolColumn));
+            //clickHandler.onClick(cursor.getString(symbolColumn));
+
+            ItemDetails itemDetails = new ItemDetails();
+            itemDetails.symbol = cursor.getString(1);
+            itemDetails.price = cursor.getString(2);
+            itemDetails.absolute_change = cursor.getString(3);
+            itemDetails.percentage_change = cursor.getString(4);
+            itemDetails.history = cursor.getString(5);
+            Intent intent = new Intent(context ,DetailsActivity.class);
+            intent.putExtra("itemSelected",itemDetails);
+            context.startActivity(intent);
 
         }
 
