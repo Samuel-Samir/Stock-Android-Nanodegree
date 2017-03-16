@@ -40,9 +40,9 @@
     <string name="no_connection_image_description">No internet connection </string>
     <string name="toast_stock_invalid">Symbol %s is invalid!</string>"
     <string name="toast_stock_exist">Symbol %s is already exist</string>
+    <string name="graph_tost"> Data Point clicked: </string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

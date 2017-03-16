@@ -4,6 +4,9 @@
     <dimen name="dp16">16dp</dimen>
     <dimen name="dp32">32dp</dimen>
     <dimen name="dp4">4dp</dimen>
+    <dimen name="smallText">24sp</dimen>
+    <dimen name="bigText">32sp</dimen>
+
 
 
 </resources>

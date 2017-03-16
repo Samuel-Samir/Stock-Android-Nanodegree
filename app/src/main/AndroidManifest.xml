@@ -38,7 +38,11 @@
             android:exported="true"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
-        <activity android:name=".ui.DetailsActivity"></activity>
+        <activity android:name=".ui.DetailsActivity"
+            android:parentActivityName=".ui.MainActivity"
+            >
+
+        </activity>
     </application>
 
 </manifest>

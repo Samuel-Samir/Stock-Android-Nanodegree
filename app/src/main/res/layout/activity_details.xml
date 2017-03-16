@@ -1,27 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.stockhawk.ui.DetailsActivity"
-    android:weightSum="2"
-    >
-    <LinearLayout
+    android:weightSum="2">
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".75"
+        android:layout_weight=".5"
         android:background="@color/colorPrimary"
         >
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/symbol"
+            tools:text="samuel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/bigText"
+            android:layout_margin="@dimen/dp16"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/price"
+            tools:text="samuel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/bigText"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/dp16"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/change"
+            tools:text="samuel"
+            android:textColor="@color/white"
+            android:textSize="@dimen/smallText"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="@dimen/dp16"
+
+            />
+    </RelativeLayout>
 
     <com.jjoe64.graphview.GraphView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/graph"
-        android:layout_weight="1.25"
+        android:layout_weight="1.5"
+        android:paddingTop="@dimen/dp4"
+        android:paddingBottom="@dimen/dp4"
+
         />
+
+
+
 
 
 </LinearLayout>
