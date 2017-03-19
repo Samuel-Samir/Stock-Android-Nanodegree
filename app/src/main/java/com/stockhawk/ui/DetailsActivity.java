@@ -22,8 +22,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-
 public class DetailsActivity extends AppCompatActivity {
 
     public GraphView graph;
@@ -49,14 +47,19 @@ public class DetailsActivity extends AppCompatActivity {
         if (getIntent().getExtras()!=null)
         {
             itemDetails = getIntent().getExtras().getParcelable("itemSelected");
-
         }
-
         symbolTextView.setText(itemDetails.symbol);
         priceTextView.setText(itemDetails.price);
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(itemDetails.absolute_change) .append(" (").append(itemDetails.percentage_change).append("%)");
         changeTextView.setText(stringBuilder);
+
+        symbolTextView.setContentDescription(String.format(getString(R.string.company_description), itemDetails.symbol));
+        priceTextView.setContentDescription(String.format(getString(R.string.company_Price_description), itemDetails.price));
+        String change = String.format(getString(R.string.details_activity_change_description), itemDetails.absolute_change )+itemDetails.percentage_change ;
+        changeTextView.setContentDescription(change);
+
+
         getGraphData(itemDetails.history);
         setGraph ();
 
@@ -101,14 +104,12 @@ public class DetailsActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), getResources().getString(R.string.graph_tost) +dataPoint.getY(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
         //////////////////////////////////////////////////////////////
-
-
         series.setDrawDataPoints(true);
         series.setDataPointsRadius(10);
         series.setThickness(4);
+        graph.setContentDescription(String.format(getString(R.string.graph_description), itemDetails.symbol));
+
 
 
     }
@@ -146,12 +147,6 @@ public class DetailsActivity extends AppCompatActivity {
             return null;
         }
         return  date ;
-                /*
-
-        int mMonth = calendar.get(Calendar.MONTH);
-        int mDay =   calendar.get(Calendar.DAY_OF_MONTH);*/
-
-
     }
 
 

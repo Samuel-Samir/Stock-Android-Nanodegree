@@ -9,6 +9,9 @@
     app:cardCornerRadius="@dimen/dp4"
     android:padding="@dimen/dp4"
     android:layout_marginTop="@dimen/dp16"
+    android:layout_marginStart="@dimen/dp32"
+    android:layout_marginEnd="@dimen/dp32"
+
     >
     <LinearLayout
 
@@ -20,16 +23,15 @@
         android:paddingEnd="@dimen/dp16">
 
 
-
         <TextView
             android:id="@+id/symbol"
             style="@style/StockSymbolTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start|center_vertical"
-            tools:text="GOOG"
             android:textColor="@color/white"
-            />
+            android:layout_marginStart="@dimen/dp32"
+            tools:text="GOOG" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -42,7 +44,7 @@
                 style="@style/BidPriceTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10sp"
+                android:layout_marginEnd="@dimen/dp32"
                 tools:text="1000.00"
                 android:textColor="@color/white"
 
@@ -57,6 +59,7 @@
                 android:paddingStart="@dimen/dp4"
                 android:paddingEnd="@dimen/dp4"
                 tools:text="100%"
+                android:layout_marginEnd="@dimen/dp32"
                 />
         </LinearLayout>
     </LinearLayout>

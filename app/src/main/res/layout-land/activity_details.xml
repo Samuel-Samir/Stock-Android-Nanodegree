@@ -20,10 +20,8 @@
             tools:text="samuel"
             android:textColor="@color/white"
             android:textSize="@dimen/bigText"
-            android:layout_marginLeft="@dimen/dp16"
-            android:layout_marginRight="@dimen/dp16"
-            android:layout_marginTop="@dimen/dp16"
-            android:layout_above="@+id/price" />
+            android:layout_margin="@dimen/dp16"
+            />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,8 +29,8 @@
             tools:text="samuel"
             android:textColor="@color/white"
             android:textSize="@dimen/bigText"
-            android:layout_alignParentBottom="true"
             android:layout_margin="@dimen/dp16"
+            android:layout_centerHorizontal="true"
 
             />
         <TextView
@@ -42,10 +40,11 @@
             tools:text="samuel"
             android:textColor="@color/white"
             android:textSize="@dimen/smallText"
-            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_alignBottom="@+id/price"
             android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/dp16"
-            />
+            android:layout_marginEnd="13dp" />
     </RelativeLayout>
 
     <com.jjoe64.graphview.GraphView
@@ -55,5 +54,11 @@
         android:layout_weight="1.5"
         android:paddingTop="@dimen/dp4"
         android:paddingBottom="@dimen/dp4"
+
         />
+
+
+
+
+
 </LinearLayout>
