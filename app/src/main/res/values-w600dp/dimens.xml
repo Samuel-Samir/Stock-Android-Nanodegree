@@ -1,0 +1,10 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="no_connection_margin">150dp</dimen>
+    <dimen name="dp16">28dp</dimen>
+    <dimen name="dp32">44dp</dimen>
+    <dimen name="dp4">10dp</dimen>
+    <dimen name="smallText">35sp</dimen>
+    <dimen name="bigText">45sp</dimen>
+
+</resources>

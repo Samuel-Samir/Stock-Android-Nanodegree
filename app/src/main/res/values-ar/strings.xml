@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name"> البرصة</string>
+
+    <string name="dialog_title">إضافة أسهم</string>
+    <string name="dialog_hint">الرمز (على سبيل المثال GOOG)</string>
+    <string name="dialog_cancel">إلغاء</string>
+    <string name="dialog_add"> إضافة </string>
+
+    <string name="error_no_network">لايوجد شبكة اتصال! سيتم تحميل  الأسهم عندما تتوفر الشبكة.</string>
+    <string name="error_no_stocks">لا يوجد اسهم مضافة ، اضغط علي الزر العائم لإضافة سهم جديد</string>
+
+    <string name="toast_stock_added_no_connectivity">الرمز  %s تم اضافته ، سيتم التحديث عندما يكون هناك شبكة متاحة</string>
+    <string name="toast_no_connectivity">سيتم التحديث عندما يكون هناك شبكة متاحة.</string>
+
+    <string name="company_description"> %s اسم الرمز</string>
+    <string name="company_Price_description">تغيير الأسعار = %s </string>
+    <string name="Change_description">التغير = %s</string>
+    <string name="new_company_description">إضافة رمز جديد</string>
+    <string name="type_name_company_description">اكتب اسم الرمز الجديد</string>
+    <string name="graph_description">الرسم البياني لتوضيح تاريخ المعاملات لشركة%s </string>
+    <string name="details_activity_change_description"> التغيير = %s النسبة المئوية =  </string>
+    <string name="no_connection_image_description">لا يوجد اتصال بالإنترنت </string>
+    <string name="toast_stock_invalid">الرمز %s  غير صالح!</string>"
+    <string name="toast_stock_exist">الرمز%s غير موجودة بالفعل</string>
+    <string name="graph_tost"> نقطة  الضغط علي  بيانات </string></resources>
