@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
+import android.support.v4.content.CursorLoader;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -50,17 +51,13 @@ public class StockWidgetService extends RemoteViewsService {
         @Override
         public void onDataSetChanged() {
             if (data != null) data.close();
-
-            String[] quoteColumns = new String[Contract.Quote.QUOTE_COLUMNS.size()];
-            quoteColumns = Contract.Quote.QUOTE_COLUMNS.toArray(quoteColumns);
+            
             final long identityToken = Binder.clearCallingIdentity();
 
-            data = getContentResolver().query(Contract.Quote.URI,
-                    quoteColumns,
-                    null,
-                    null,
-                    Contract.Quote.COLUMN_SYMBOL);
-
+            data = getContentResolver().query(
+                    Contract.Quote.URI,
+                    Contract.Quote.QUOTE_COLUMNS.toArray(new String[]{}),
+                    null, null, Contract.Quote.COLUMN_SYMBOL);
             Binder.restoreCallingIdentity(identityToken);
         }
 
