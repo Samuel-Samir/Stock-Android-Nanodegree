@@ -43,6 +43,9 @@
     <string name="toast_stock_invalid">Symbol %s is invalid!</string>"
     <string name="toast_stock_exist">Symbol %s is already exist</string>
     <string name="graph_tost"> Data Point clicked: </string>
+    <string name="no_information">Stock information is not available.</string>
+    <string name="widget_label">Stock</string>
+    <string name="widget_cd">Stock hawk widget</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 

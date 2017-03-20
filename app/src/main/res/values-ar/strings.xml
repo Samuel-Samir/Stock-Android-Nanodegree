@@ -23,4 +23,9 @@
     <string name="no_connection_image_description">لا يوجد اتصال بالإنترنت </string>
     <string name="toast_stock_invalid">الرمز %s  غير صالح!</string>"
     <string name="toast_stock_exist">الرمز%s غير موجودة بالفعل</string>
-    <string name="graph_tost"> نقطة  الضغط علي  بيانات </string></resources>
+    <string name="graph_tost"> نقطة  الضغط علي  بيانات </string>
+
+    <string name="no_information">المعلومات غير متوافره</string>
+    <string name="widget_label">البرصة</string>
+
+</resources>

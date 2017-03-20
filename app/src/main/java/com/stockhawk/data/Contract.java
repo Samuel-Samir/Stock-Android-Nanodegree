@@ -19,6 +19,8 @@ public final class Contract {
     @SuppressWarnings("unused")
     public static final class Quote implements BaseColumns {
 
+        public static final Uri uri = BASE_URI.buildUpon().appendPath(PATH_QUOTE).build();
+
         public static final Uri URI = BASE_URI.buildUpon().appendPath(PATH_QUOTE).build();
         public static final String COLUMN_SYMBOL = "symbol";
         public static final String COLUMN_PRICE = "price";
