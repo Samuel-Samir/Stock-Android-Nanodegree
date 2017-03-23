@@ -147,6 +147,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     }
 
     void addStock(String symbol) {
+        if (isProbablyArabic(symbol))
+        {
+            Toast.makeText(this , getResources().getString(R.string.arabic_symbol) ,Toast.LENGTH_LONG).show();
+             return;
+        }
         if (symbol != null && !symbol.isEmpty()) {
 
             Set<String> stockPref = PrefUtils.getStocks(this);
@@ -167,7 +172,15 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         }
     }
-
+    public  boolean isProbablyArabic(String s) {
+        for (int i = 0; i < s.length();) {
+            int c = s.codePointAt(i);
+            if (c >= 0x0600 && c <= 0x06E0)
+                return true;
+            i += Character.charCount(c);
+        }
+        return false;
+    }
 
 
 

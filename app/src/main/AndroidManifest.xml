@@ -46,10 +46,12 @@
         <!-- Widget receiver and services-->
         <receiver
             android:name=".widget.StockWidgetProvider"
-            android:label="@string/widget_label">
+            android:label="@string/widget_label"
+            android:enabled="true"
+            >
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
-                <action android:name="com.calgen.stockhawk.ACTION_DATA_UPDATED"/>
+                <action android:name="com.stockhawk.ACTION_DATA_UPDATED"/>
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
@@ -58,7 +60,9 @@
         <service
             android:name=".widget.StockWidgetService"
             android:exported="false"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+            android:enabled="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            />
 
     </application>
 

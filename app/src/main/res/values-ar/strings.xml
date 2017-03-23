@@ -27,5 +27,7 @@
 
     <string name="no_information">المعلومات غير متوافره</string>
     <string name="widget_label">البرصة</string>
+    <string name="arabic_symbol">الاسم العربي غير صالح ,ادخل اسم الشركة بلغة الانجليزية</string>
+
 
 </resources>

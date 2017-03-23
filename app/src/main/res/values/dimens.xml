@@ -7,7 +7,7 @@
     <dimen name="smallText">24sp</dimen>
     <dimen name="bigText">32sp</dimen>
 
-    <dimen name="widget_height">250dp</dimen>
-    <dimen name="widget_width">200dp</dimen>
+    <dimen name="widget_height">200dp</dimen>
+    <dimen name="widget_width">300dp</dimen>
 
 </resources>

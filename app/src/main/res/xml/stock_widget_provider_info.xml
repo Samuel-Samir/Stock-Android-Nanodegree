@@ -8,6 +8,6 @@
     android:minResizeWidth="@dimen/widget_width"
     android:minWidth="@dimen/widget_width"
     android:resizeMode="horizontal|vertical"
-    android:updatePeriodMillis="0"
+    android:updatePeriodMillis="30"
     android:widgetCategory="home_screen">
 </appwidget-provider>

@@ -6,10 +6,11 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
-import android.support.v4.content.CursorLoader;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+import android.widget.TextView;
 
 import com.stockhawk.R;
 import com.stockhawk.data.Contract;
@@ -28,7 +29,8 @@ public class StockWidgetService extends RemoteViewsService {
         return new ListRemoteViewFactory();
     }
 
-    public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFactory {
+    public class ListRemoteViewFactory implements RemoteViewsService.RemoteViewsFactory
+    {
 
         private Cursor data = null;
 
@@ -51,7 +53,7 @@ public class StockWidgetService extends RemoteViewsService {
         @Override
         public void onDataSetChanged() {
             if (data != null) data.close();
-            
+
             final long identityToken = Binder.clearCallingIdentity();
 
             data = getContentResolver().query(
@@ -74,8 +76,7 @@ public class StockWidgetService extends RemoteViewsService {
                 return null;
             }
 
-            RemoteViews remoteViews = new RemoteViews(getPackageName(),
-                    R.layout.list_item_quote);
+            RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.widget_item);
 
             String stockSymbol = data.getString(Contract.Quote.POSITION_SYMBOL);
             Float stockPrice = data.getFloat(Contract.Quote.POSITION_PRICE);
@@ -96,16 +97,16 @@ public class StockWidgetService extends RemoteViewsService {
                 backgroundDrawable = R.drawable.percent_change_pill_red;
             }
 
-            remoteViews.setTextViewText(R.id.symbol, stockSymbol);
-            remoteViews.setTextViewText(R.id.price, dollarFormat.format(stockPrice));
-            remoteViews.setTextViewText(R.id.change, dollarFormatWithPlus.format(absoluteChange));
-            remoteViews.setInt(R.id.change, "setBackgroundResource", backgroundDrawable);
-            remoteViews.setInt(R.id.list_item_quote, "setBackgroundResource", R.color.backGraound);
+            remoteViews.setTextViewText(R.id.widget_symbol, stockSymbol);
+            remoteViews.setTextViewText(R.id.widget_price, dollarFormat.format(stockPrice));
+            remoteViews.setTextViewText(R.id.widget_change, dollarFormatWithPlus.format(absoluteChange));
+            remoteViews.setInt(R.id.widget_change, "setBackgroundResource", backgroundDrawable);
+            remoteViews.setInt(R.id.widget_list_item_quote, "setBackgroundResource", R.color.backGraound);
 
             final Intent fillInIntent = new Intent();
             Uri stockUri = Contract.Quote.makeUriForStock(stockSymbol);
             fillInIntent.setData(stockUri);
-            remoteViews.setOnClickFillInIntent(R.id.list_item_quote, fillInIntent);
+           // remoteViews.setOnClickFillInIntent(R.id.widget_list_item_quote, fillInIntent);
             return remoteViews;
 
         }
@@ -131,3 +132,6 @@ public class StockWidgetService extends RemoteViewsService {
         }
     }
 }
+
+// student  sopark
+//

@@ -46,6 +46,7 @@
     <string name="no_information">Stock information is not available.</string>
     <string name="widget_label">Stock</string>
     <string name="widget_cd">Stock hawk widget</string>
+    <string name="arabic_symbol">Arabic symbol not allowed,Enter english symbol</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 
