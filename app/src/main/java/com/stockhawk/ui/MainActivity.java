@@ -152,6 +152,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             Toast.makeText(this , getResources().getString(R.string.arabic_symbol) ,Toast.LENGTH_LONG).show();
              return;
         }
+        if (!symbol.matches("^([A-Za-z])+$"))
+        {
+            Toast.makeText(this , String.format(getResources().getString(R.string.toast_stock_invalid) ,symbol) , Toast.LENGTH_LONG).show();
+            return;
+        }
         if (symbol != null && !symbol.isEmpty()) {
 
             Set<String> stockPref = PrefUtils.getStocks(this);

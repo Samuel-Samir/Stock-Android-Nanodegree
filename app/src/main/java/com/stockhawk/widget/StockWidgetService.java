@@ -34,10 +34,8 @@ public class StockWidgetService extends RemoteViewsService {
 
         private Cursor data = null;
 
-        //Lifecycle start
         @Override
         public void onCreate() {
-            //No action needed
         }
 
         @Override
@@ -48,7 +46,6 @@ public class StockWidgetService extends RemoteViewsService {
             }
 
         }
-        //Lifecycle end
 
         @Override
         public void onDataSetChanged() {
@@ -106,7 +103,6 @@ public class StockWidgetService extends RemoteViewsService {
             final Intent fillInIntent = new Intent();
             Uri stockUri = Contract.Quote.makeUriForStock(stockSymbol);
             fillInIntent.setData(stockUri);
-           // remoteViews.setOnClickFillInIntent(R.id.widget_list_item_quote, fillInIntent);
             return remoteViews;
 
         }
@@ -133,5 +129,3 @@ public class StockWidgetService extends RemoteViewsService {
     }
 }
 
-// student  sopark
-//
